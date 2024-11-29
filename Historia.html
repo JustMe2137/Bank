@@ -35,8 +35,61 @@
     </select>
     <input type="number" id="kwota-value" placeholder="Wartość kwoty">
 
-    <label for="data">Filtruj po dniu:</label>
-    <input type="date" id="data" name="data">
+ 
+
+    <label for="kategoria-select">Filtruj po kategorii:</label>
+    <select name="Filtruj po kategorii" id="kategoria-select">
+        <option value="">Wszystkie</option>
+        <option value="Zakupy przez internet">Zakupy przez internet</option>
+        <option value="Transport">Transport</option>
+        <option value="Odzież">Odzież</option>
+        <option value="Obuwie">Obuwie</option>
+        <option value="Urządzenia elektroniczne">Urządzenia elektroniczne</option>
+        <option value="Artykuły kosmetyczne">Artykuły kosmetyczne</option>
+        <option value="Przelew wewnętrzny">Przelew wewnętrzny</option>
+        <option value="Inne">Inne</option>
+        <option value="Artykuły spożywcze">Artykuły spożywcze</option>
+    </select>
+    
+    <label for="nazwa-select">Filtruj po Nazwie Odbiorcy/Wysyłającego:</label>
+<select id="nazwa-select" name="Filtruj po nazwie">
+    <option value="">Wszystkie</option>
+    <option value="Steam">Steam</option>
+    <option value="Lidl">Lidl</option>
+    <option value="Biedronka">Biedronka</option>
+    <option value="Rossmann">Rossmann</option>
+    <option value="Orlen">Orlen</option>
+    <option value="BP">BP</option>
+    <option value="Shell">Shell</option>
+    <option value="Reserved">Reserved</option>
+    <option value="H&M">H&M</option>
+    <option value="CCC">CCC</option>
+    <option value="MediaMarkt">MediaMarkt</option>
+    <option value="RTV Euro AGD">RTV Euro AGD</option>
+    <option value="Hebe">Hebe</option>
+    <option value="Kaufland">Kaufland</option>
+    <option value="Carrefour">Carrefour</option>
+    <option value="Epic Games Store">Epic Games Store</option>
+    <option value="Ubisoft Connect">Ubisoft Connect</option>
+    <option value="BattleNet">BattleNet</option>
+    <option value="Babcia">Babcia</option>
+    <option value="Mama">Mama</option>
+    <option value="Tata">Tata</option>
+    <option value="Pracodawca">Pracodawca</option>
+</select>
+
+<label>Filtruj po dacie:</label>
+<select id="mniejsze-wieksze-rowne">
+    <option value=">">Późniejsze niż</option>
+    <option value="<">Wcześniejsze niż</option>
+    <option value="=">Równe</option>
+</select>
+<input type="date" id="data1">
+
+
+
+
+    
     <button onclick="filtrujTransakcje()">Filtruj</button>
 </div>
 

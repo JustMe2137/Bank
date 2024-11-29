@@ -281,41 +281,68 @@ if(stronaDocelowa == 'strona-glowna-przycisk-header'){
     
     wygenerujStatystyki(true);
 }
+
 function filtrujTransakcje() {
-    const operator = document.getElementById('kwota-operator').value;
-    const kwotaValue = parseFloat(document.getElementById('kwota-value').value);
-    const selectedDate = document.getElementById('data').value;
-    
+    const operator = document.getElementById('kwota-operator').value;  // Changed to 'kwota-operator'
+    const selectedDate = document.getElementById('data1').value; 
+    const selectedCategory = document.getElementById('kategoria-select').value;
+    const selectedName = document.getElementById('nazwa-select').value; 
+
     let filteredTransakcje = transakcje;
-    
-    
+
+    // Handle kwota filter
+    const kwotaValue = parseFloat(document.getElementById('kwota-value').value);
     if (!isNaN(kwotaValue)) {
         filteredTransakcje = filteredTransakcje.filter(transakcja => {
             const kwota = transakcja[0];
             switch (operator) {
-                case '>':
-                    return kwota > kwotaValue;
-                case '<':
-                    return kwota < kwotaValue;
-                case '=':
-                    return kwota === kwotaValue;
-                default:
-                    return true;
+                case '>': return kwota > kwotaValue;
+                case '<': return kwota < kwotaValue;
+                case '=': return kwota === kwotaValue;
+                default: return true;  // Default case if no operator selected
             }
         });
     }
 
-    
+    // Handle date filter (if selected)
     if (selectedDate) {
         const filterDate = new Date(selectedDate);
+
         filteredTransakcje = filteredTransakcje.filter(transakcja => {
             const transakcjaDate = transakcja[3];
-            return transakcjaDate.toDateString() === filterDate.toDateString();
+
+            switch (operator) {
+                case '>': 
+                    return transakcjaDate > filterDate;
+                case '<':
+                    return transakcjaDate < filterDate;
+                case '=':
+                    return transakcjaDate.toDateString() === filterDate.toDateString();
+                default:
+                    return true; 
+            }
         });
     }
 
-    
-    wyswietlTransakcje(filteredTransakcje);
+    // Handle category filter (if selected)
+    if (selectedCategory) {
+        filteredTransakcje = filteredTransakcje.filter(transakcja => transakcja[2] === selectedCategory);
+    }
+
+    // Handle name filter (if selected)
+    if (selectedName) {
+        filteredTransakcje = filteredTransakcje.filter(transakcja => transakcja[1] === selectedName);
+    }
+
+    // Display filtered transactions or show no results message
+    if (filteredTransakcje.length === 0) {
+        const listaTransakcji = document.getElementById('lista-transakcji');
+        wyczyscTransakcje();
+        listaTransakcji.innerHTML = `
+            <div class="brak-transakcji" style="color: gray; font-style: italic; text-align: center;">
+                Brak pasujących transakcji
+            </div>`;
+    } else {
+        wyswietlTransakcje(filteredTransakcje);
+    }
 }
-
-
